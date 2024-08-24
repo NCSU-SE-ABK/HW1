@@ -11,7 +11,7 @@ def divide(a,b):
     return a/b
 
 def stringPlusNumber(a,b):
-    return a+(b)
+    return a+str(b)
 
 print(sum(5,6))
 print(stringPlusNumber('abcd',5))
