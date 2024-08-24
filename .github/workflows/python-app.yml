@@ -17,38 +17,23 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    
     steps:
     - uses: actions/checkout@v4
-
-    - name: Install dependencies for building Python
-      run: |
-        sudo apt update
-        sudo apt install -y wget build-essential libssl-dev zlib1g-dev libncurses5-dev libncursesw5-dev \
-          libreadline-dev libsqlite3-dev libgdbm-dev libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev tk-dev
-
-    - name: Download and Install Python 3.13
-      run: |
-        wget https://www.python.org/ftp/python/3.13.0/Python-3.13.0.tar.xz
-        tar -xf Python-3.13.0.tar.xz
-        cd Python-3.13.0
-        ./configure --enable-optimizations
-        make -j $(nproc)
-        sudo make altinstall
-
-    - name: Verify Python Installation
-      run: python3.13 --version
-
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
     - name: Install dependencies
       run: |
-        python3.13 -m pip install --upgrade pip
-        python3.13 -m pip install flake8 pytest
-        if [ -f requirements.txt ]; then python3.13 -m pip install -r requirements.txt; fi
-
+        python -m pip install --upgrade pip
+        pip install flake8 pytest
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with flake8
       run: |
-        python3.13 -m flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        python3.13 -m flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
-      run: python3.13 -m pytest
+      run: |
+        pytest
