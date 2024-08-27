@@ -23,7 +23,7 @@ def divide(a,b):
     return a/b
 
 def stringPlusNumber(a,b):
-    return a+str(b)
+    return a+(b)
 
 # print(sum(5,6))
 # # print(multiply(5,6))
