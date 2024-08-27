@@ -25,8 +25,8 @@ def divide(a,b):
 def stringPlusNumber(a,b):
     return a+str(b)
 
-print(sum(5,6))
-# print(multiply(5,6))
-# print(subtract(6,5))
-# print(divide(10,2))
-print(stringPlusNumber('abcd',5))
+# print(sum(5,6))
+# # print(multiply(5,6))
+# # print(subtract(6,5))
+# # print(divide(10,2))
+# print(stringPlusNumber('abcd',5))
