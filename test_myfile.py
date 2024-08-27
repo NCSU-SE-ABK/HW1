@@ -9,7 +9,7 @@ def test_divide():
     assert divide(10,2) == 5
 
 def test_stringPlusNumber():
-    assert  stringPlusNumber('abcd',str(5)) == 'abcd5'
+    assert  stringPlusNumber('abcd',(5)) == 'abcd5'
 
 def sum(a,b):
     return a+b
